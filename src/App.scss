@@ -1,0 +1,12 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  width: 1600px;
+  margin: 0 auto;
+}
+
+html, body {
+  background-color: lightgray;
+}
