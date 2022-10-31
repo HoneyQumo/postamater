@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Col, Layout, Row} from 'antd';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 import './Header.scss';
 
@@ -17,8 +17,8 @@ const Header = () => {
       </Row>
       <Row className="header__menu menu">
         <div className="menu__links">
-          <Link to='/map' className="menu__link">Карта</Link>
-          <Link to='/points-list' className="menu__link">Таблица значений</Link>
+          <NavLink to='/map' className="menu__link">Карта</NavLink>
+          <NavLink to='/points-list' className="menu__link">Таблица значений</NavLink>
         </div>
       </Row>
     </Layout.Header>
