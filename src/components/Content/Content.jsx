@@ -13,8 +13,8 @@ const Content = () => {
     <Layout.Content className="app__content">
       <Routes>
         <Route index element={<Hello />} />
-        <Route to='/map' element={<Map />} />
-        <Route to='/points-list' element={<PointsList />} />
+        <Route path='/map' element={<Map />} />
+        <Route path='/points-list' element={<PointsList />} />
       </Routes>
     </Layout.Content>
   );
