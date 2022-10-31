@@ -7,7 +7,7 @@ import './Footer.scss'
 const Footer = () => {
   return (
     <Layout.Footer className='footer'>
-      Я ФУТЕР
+      Тигры МОЭК, 2023
     </Layout.Footer>
   );
 };

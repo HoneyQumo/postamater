@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Iframe from 'react-iframe';
 import {LoadingOutlined} from '@ant-design/icons';
+import {Col, Divider, Input, Row, Select} from 'antd';
 
 import './Map.scss';
+import MapSidebar from './MapSidebar/MapSidebar';
 
 const Map = () => {
   const [loader, setLoader] = useState(true);
@@ -10,21 +12,26 @@ const Map = () => {
   //TODO: Убрать фейковую задержку и сделать зависимость от подгрузки.
   useEffect(() => {
     setTimeout(() => {
-      setLoader(false)
-    }, 1000)
-  })
+      setLoader(false);
+    }, 1000);
+  });
 
   return (
-    <div className="map">
-      {loader ? <LoadingOutlined className='map__loader' /> :
-        <Iframe url="http://37.230.196.15/arrangeKali/"
-                width="100%"
-                display="flex"
-                className="map__iFrame"
-                loading='eager'
-        />
-      }
-    </div>
+    <Row className='map'>
+      <Col span={4} className='map__sidebar sidebar'>
+        <MapSidebar />
+      </Col>
+      <Col span={20} className="map__content content">
+        {loader ? <LoadingOutlined className="content__loader"/> :
+          <Iframe url="http://37.230.196.15/arrangeKali/"
+                  width="100%"
+                  display="flex"
+                  className="content__iFrame"
+                  loading="eager"
+          />
+        }
+      </Col>
+    </Row>
   );
 };
 

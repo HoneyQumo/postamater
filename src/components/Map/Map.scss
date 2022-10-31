@@ -1,17 +1,30 @@
+
 .map {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: calc(100vh - 132px);
 
-  // .map__iFrame
-  &__iFrame {
-    min-height: 805px;
-    border: 0;
+  // .map__sidebar
+  .sidebar {
   }
 
+  // .map__content
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.content {
+  width: 100%;
+  // .content__loader
   &__loader {
     font-size: 50px;
     color: #CC2222;
+  }
+
+  // .content__iFrame
+  &__iFrame {
+    min-height: 805px;
+    border: 0;
   }
 }
