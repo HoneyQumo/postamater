@@ -25,8 +25,11 @@ const MapSidebar = () => {
         <Option value="6">Южный административный округ</Option>
       </Select>
       <Divider plain orientation="left" style={{margin: '5px 0'}}>Муниципалитет</Divider>
-      <Divider plain orientation="left" style={{margin: '5px 0'}}>Доступность (в метрах)</Divider>
-      <InputNumber min={0} className='sidebar__inputAccessibility' />
+      <div className='sidebar__inputAccessibility-block' >
+        <Divider plain orientation="left" style={{margin: '5px 0 '}} >Доступность (в метрах)</Divider>
+        <InputNumber min={0} className='sidebar__inputAccessibility' />
+        <Divider style={{marginTop: '5px'}} />
+      </div>
       <Divider plain orientation="left" style={{margin: '5px 0'}}>Охват населения г.Москва (%)</Divider>
       <Divider plain orientation="left" style={{margin: '5px 0'}}>Целевое количество постаматов</Divider>
 
