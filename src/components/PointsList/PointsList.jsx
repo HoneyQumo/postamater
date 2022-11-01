@@ -1,6 +1,6 @@
 import React, {useLayoutEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Table} from 'antd';
+import {Table, Typography} from 'antd';
 
 import {fetchPointsList} from '../../store/slices/pointsListSlice';
 
@@ -49,14 +49,17 @@ const PointsList = () => {
       <Table.Column title="Кол-во посетителей" dataIndex="nearestVisitors" key="nearestVisitors"/>
       <Table.Column title="Время работы" dataIndex="nearestWorkingTime" key="nearestWorkingTime"
                     render={(_, record) => {
-                      const timeSplitted = record.nearestWorkingTime.split(',');
-                      return (
-                        <>
-                          {timeSplitted.map(time => (
-                            <p style={{margin: 0}}>{`${time}\n`}</p>
-                          ))}
-                        </>
-                      );
+                      // const timeSplitted = record.nearestWorkingTime.split(',');
+                      // return (
+                      //   <>
+                      //     {timeSplitted.map(time => (
+                      //       <Typography.Paragraph ellipsis={{expandable: true, rows: 1}} style={{margin: 0}}>{`${time}\n`}</Typography.Paragraph>
+                      //     ))}
+                      //   </>
+                      // );
+                      return(
+                        <Typography.Paragraph ellipsis={{expandable: true, rows: 1}} style={{margin: 0}}>{_}</Typography.Paragraph>
+                      )
                     }}/>
     </Table>
   );
