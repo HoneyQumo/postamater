@@ -35,30 +35,30 @@ const PointsList = () => {
     nearestObject: points.nearestObject,
     nearestVisitors: points.nearestVisitors,
     nearestWorkingTime: points.nearestWorkingTime,
+    key: points.point_id
   }))];
 
+  //TODO: Изменить ширину ячеек таблицы
   return (
-    <div>
-      <Table dataSource={data} scroll={{y: 'calc(100vh - 250px)'}} bordered pagination={{position: ['bottomCenter']}}>
-        <Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>
-        <Table.Column title="Район" dataIndex="district" key="district"/>
-        <Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate"/>
-        <Table.Column title="Адрес" dataIndex="nearestAddress" key="nearestAddress"/>
-        <Table.Column title="Название" dataIndex="nearestObject" key="nearestObject"/>
-        <Table.Column title="Кол-во посетителей" dataIndex="nearestVisitors" key="nearestVisitors"/>
-        <Table.Column title="Время работы" dataIndex="nearestWorkingTime" key="nearestWorkingTime"
-                      render={(_, record) => {
-                        const timeSplitted = record.nearestWorkingTime.split(',');
-                        return (
-                          <>
-                            {timeSplitted.map(time => (
-                              <p style={{margin: 0}}>{`${time}\n`}</p>
-                            ))}
-                          </>
-                        );
-                      }}/>
-      </Table>
-    </div>
+    <Table dataSource={data} scroll={{y: 'calc(100vh - 250px)'}} bordered pagination={{position: ['bottomCenter']}} >
+      <Table.Column title="Административный округ" dataIndex="admArea" key="admArea" />
+      <Table.Column title="Район" dataIndex="district" key="district"/>
+      <Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate"/>
+      <Table.Column title="Адрес" dataIndex="nearestAddress" key="nearestAddress"/>
+      <Table.Column title="Название" dataIndex="nearestObject" key="nearestObject"/>
+      <Table.Column title="Кол-во посетителей" dataIndex="nearestVisitors" key="nearestVisitors"/>
+      <Table.Column title="Время работы" dataIndex="nearestWorkingTime" key="nearestWorkingTime"
+                    render={(_, record) => {
+                      const timeSplitted = record.nearestWorkingTime.split(',');
+                      return (
+                        <>
+                          {timeSplitted.map(time => (
+                            <p style={{margin: 0}}>{`${time}\n`}</p>
+                          ))}
+                        </>
+                      );
+                    }}/>
+    </Table>
   );
 };
 
