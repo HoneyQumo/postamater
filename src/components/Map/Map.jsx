@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Iframe from 'react-iframe';
 import {LoadingOutlined} from '@ant-design/icons';
-import {Col, Divider, Input, Row, Select} from 'antd';
+import {Col, Row} from 'antd';
 
 import './Map.scss';
 import MapSidebar from './MapSidebar/MapSidebar';
@@ -13,7 +13,7 @@ const Map = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoader(false);
-    }, 1000);
+    }, 1500);
   });
 
   return (

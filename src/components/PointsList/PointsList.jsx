@@ -40,7 +40,7 @@ const PointsList = () => {
 
   //TODO: Изменить ширину ячеек таблицы
   return (
-    <Table dataSource={data} scroll={{y: 'calc(100vh - 250px)'}} bordered pagination={{position: ['bottomCenter']}}>
+    <Table dataSource={data} scroll={{y: 'calc(100vh - 252px)'}} bordered pagination={{position: ['bottomCenter'] }}>
       <Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>
       <Table.Column title="Район" dataIndex="district" key="district"/>
       <Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate"/>
