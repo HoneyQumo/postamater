@@ -40,8 +40,8 @@ const PointsList = () => {
 
   //TODO: Изменить ширину ячеек таблицы
   return (
-    <Table dataSource={data} scroll={{y: 'calc(100vh - 250px)'}} bordered pagination={{position: ['bottomCenter']}} >
-      <Table.Column title="Административный округ" dataIndex="admArea" key="admArea" />
+    <Table dataSource={data} scroll={{y: 'calc(100vh - 250px)'}} bordered pagination={{position: ['bottomCenter']}}>
+      <Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>
       <Table.Column title="Район" dataIndex="district" key="district"/>
       <Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate"/>
       <Table.Column title="Адрес" dataIndex="nearestAddress" key="nearestAddress"/>
@@ -49,17 +49,20 @@ const PointsList = () => {
       <Table.Column title="Кол-во посетителей" dataIndex="nearestVisitors" key="nearestVisitors"/>
       <Table.Column title="Время работы" dataIndex="nearestWorkingTime" key="nearestWorkingTime"
                     render={(_, record) => {
-                      // const timeSplitted = record.nearestWorkingTime.split(',');
-                      // return (
-                      //   <>
-                      //     {timeSplitted.map(time => (
-                      //       <Typography.Paragraph ellipsis={{expandable: true, rows: 1}} style={{margin: 0}}>{`${time}\n`}</Typography.Paragraph>
-                      //     ))}
-                      //   </>
-                      // );
-                      return(
-                        <Typography.Paragraph ellipsis={{expandable: true, rows: 1}} style={{margin: 0}}>{_}</Typography.Paragraph>
-                      )
+                      const timeSplitted = record.nearestWorkingTime.split(',');
+                      return (
+                        <Typography.Paragraph
+                          ellipsis={{expandable: true, rows: 1, symbol: 'раскрыть'}}
+                          style={{margin: 0}}
+                        >
+                          {timeSplitted.map(time => (
+                            <>
+                              {`${time}`} <br/>
+                            </>
+                          ))}
+                        </Typography.Paragraph>
+                      );
+
                     }}/>
     </Table>
   );
