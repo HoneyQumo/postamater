@@ -1,9 +1,9 @@
 .hello {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
-  min-height: calc(100vh - 132px);
+  height: calc(100vh - 132px);
   // .hello__title
   &__title {
   }

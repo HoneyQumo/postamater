@@ -24,7 +24,7 @@
 
   // .content__iFrame
   &__iFrame {
-    min-height: 805px;
+    height: calc(100vh - 132px);
     border: 0;
   }
 }
