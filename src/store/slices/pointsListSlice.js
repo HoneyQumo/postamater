@@ -19,17 +19,10 @@ const pointsListSlice = createSlice({
     pointsListData: [],
     status: undefined,
     error: undefined,
-    admAreaList: []
+    admAreaList: [],
+    districtList: []
   },
-  reducers: {
-    filterAdmArea(state) {
-      // state.pointsListData.map(point => {
-      //   if (!state.admAreaList.includes(point.admArea)) {
-      //     state.admAreaList.push(point.admArea)
-      //   }
-      // })
-    }
-  },
+  reducers: {},
   extraReducers: {
     [fetchPointsList.pending]: (state) => {
       state.error = ''
@@ -41,9 +34,15 @@ const pointsListSlice = createSlice({
       state.pointsListData = action.payload.data
 
       // Добавление в массив уникальных значений admArea
-      state.pointsListData.map((point, i) => {
+      state.pointsListData.map((point) => {
         if (!state.admAreaList.includes(point.admArea)) {
           state.admAreaList.push(point.admArea)
+        }
+      })
+
+      state.pointsListData.map((point) => {
+        if (!state.districtList.includes(point.district)) {
+          state.districtList.push(point.district)
         }
       })
 

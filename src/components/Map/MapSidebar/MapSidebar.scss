@@ -10,4 +10,20 @@
   &__divider {
     margin: 10px 0;
   }
+
+  // .mapForm__buttons
+  &__buttons{
+    display: flex;
+    justify-content: flex-end;
+  }
+  // .mapForm__button
+  &__button{
+    border-color: #CC2222;
+    background-color: #CC2222;
+
+    &:hover,&:focus {
+      border-color: #FA2222;
+      background-color: #FA2222;
+    }
+  }
 }
