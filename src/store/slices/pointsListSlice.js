@@ -38,12 +38,14 @@ const pointsListSlice = createSlice({
         if (!state.admAreaList.includes(point.admArea)) {
           state.admAreaList.push(point.admArea)
         }
+        return undefined
       })
 
       state.pointsListData.map((point) => {
         if (!state.districtList.includes(point.district)) {
           state.districtList.push(point.district)
         }
+        return undefined
       })
 
     },

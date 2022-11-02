@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Divider, Form, Input, InputNumber, Select, Slider} from 'antd';
+import {Button, Divider, Form, InputNumber, Select, Slider} from 'antd';
 
 import './MapSidebar.scss';
 import {useSelector} from 'react-redux';
@@ -50,7 +50,7 @@ const MapSidebar = () => {
         <Divider className="mapForm__divider"/>
         <Form.Item className="mapForm__item" label="Охват населения Москвы (в %)" name="targetCoverage"
                    initialValue={10}>
-          <Slider min={1} max={100} marks={{0: '0%', 100: '100%'}}
+          <Slider min={1} max={100} marks={{0: {style: {color: 'black'}, label: '0%'}, 100: {style: {color: 'black'}, label: '100%'}}}
                   trackStyle={{backgroundColor: '#cc2222'}}
                   handleStyle={{backgroundColor: '#cc2222', borderColor: 'lightgray'}}
           />
