@@ -9,12 +9,16 @@ import MapSidebar from './MapSidebar/MapSidebar';
 const Map = () => {
   const [loader, setLoader] = useState(true);
 
-  //TODO: Убрать фейковую задержку и сделать зависимость от подгрузки.
-  useEffect(() => {
-    setTimeout(() => {
-      setLoader(false);
-    }, 1500);
-  });
+
+  useEffect( () => {
+    const fetchData = async () => {
+      const response = await fetch('http://37.230.196.15/arrangeKali/')
+      if (response.ok) {
+        setLoader(prevState => !prevState)
+      }
+    }
+    fetchData()
+  },[])
 
   return (
     <Row className='map'>
