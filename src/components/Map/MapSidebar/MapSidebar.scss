@@ -1,12 +1,13 @@
+.mapForm {
+  padding: 7.5px;
 
-.sidebar {
-  padding: 0 5px;
-
-  // .sidebar__selectRegion
-  &__selectRegion {
-    width: 100%;
+  // .mapForm__item
+  &__item {
+    margin-bottom: 10px;
   }
-  &__inputAccessibility {
-    width: 100%;
+
+  // .mapForm__divider
+  &__divider {
+    margin: 10px 0;
   }
 }

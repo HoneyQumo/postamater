@@ -18,9 +18,18 @@ const pointsListSlice = createSlice({
   initialState: {
     pointsListData: [],
     status: undefined,
-    error: undefined
+    error: undefined,
+    admAreaList: []
   },
-  reducers: {},
+  reducers: {
+    filterAdmArea(state) {
+      // state.pointsListData.map(point => {
+      //   if (!state.admAreaList.includes(point.admArea)) {
+      //     state.admAreaList.push(point.admArea)
+      //   }
+      // })
+    }
+  },
   extraReducers: {
     [fetchPointsList.pending]: (state) => {
       state.error = ''
@@ -30,6 +39,14 @@ const pointsListSlice = createSlice({
       state.error = ''
       state.status = 'fulfilled'
       state.pointsListData = action.payload.data
+
+      // Добавление в массив уникальных значений admArea
+      state.pointsListData.map((point, i) => {
+        if (!state.admAreaList.includes(point.admArea)) {
+          state.admAreaList.push(point.admArea)
+        }
+      })
+
     },
     [fetchPointsList.rejected]: (state, action) => {
       state.error = action.payload
@@ -37,5 +54,7 @@ const pointsListSlice = createSlice({
     }
   }
 })
+
+export const {filterAdmArea} = pointsListSlice.actions
 
 export default pointsListSlice.reducer

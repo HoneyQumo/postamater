@@ -1,19 +1,12 @@
-import React, {useLayoutEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react';
+import {useSelector} from 'react-redux';
 import {Table, Typography} from 'antd';
 
-import {fetchPointsList} from '../../store/slices/pointsListSlice';
 
 import './PointsList.scss';
 
 
 const PointsList = () => {
-  const dispatch = useDispatch();
-
-  useLayoutEffect(() => {
-    dispatch(fetchPointsList());
-  }, [dispatch]);
-
   const pointsList = useSelector(state => state.pointsList.pointsListData);
   console.log(pointsList);
 

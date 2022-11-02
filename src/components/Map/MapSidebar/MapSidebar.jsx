@@ -1,38 +1,46 @@
-import React from 'react';
-import {Divider, InputNumber, Select} from 'antd';
+import React, {useEffect} from 'react';
+import {Divider, Form, Input, Select} from 'antd';
 
-import './MapSidebar.scss'
+import './MapSidebar.scss';
+import {useDispatch, useSelector} from 'react-redux';
+import {filterAdmArea} from '../../../store/slices/pointsListSlice';
 
-const {Option} = Select
 
 const MapSidebar = () => {
+  const admAreas = useSelector(state => state.pointsList.admAreaList);
+
+
   return (
     <>
-      <Divider plain orientation="left" style={{margin: '5px 0'}}>Административный округ</Divider>
-      <Select showSearch placeholder="Укажите адм. округ"
-              className="sidebar__selectRegion"
-              optionFilterProp="children"
-              filterOption={(input, option) => option.children.includes(input)}
-              filterSort={(optionA, optionB) =>
-                optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-              }
-      >
-        <Option value="1">Центральный административный округ</Option>
-        <Option value="2">Северный административный округ</Option>
-        <Option value="3">Северо-Восточный административный округ</Option>
-        <Option value="4">Восточный административный округ</Option>
-        <Option value="5">Юго-Восточный административный округ</Option>
-        <Option value="6">Южный административный округ</Option>
-      </Select>
-      <Divider plain orientation="left" style={{margin: '5px 0'}}>Муниципалитет</Divider>
-      <div className='sidebar__inputAccessibility-block' >
-        <Divider plain orientation="left" style={{margin: '5px 0 '}} >Доступность (в метрах)</Divider>
-        <InputNumber min={0} className='sidebar__inputAccessibility' />
-        <Divider style={{marginTop: '5px'}} />
-      </div>
-      <Divider plain orientation="left" style={{margin: '5px 0'}}>Охват населения г.Москва (%)</Divider>
-      <Divider plain orientation="left" style={{margin: '5px 0'}}>Целевое количество постаматов</Divider>
-
+      <Form layout="vertical" className="mapForm">
+        <Form.Item className="mapForm__item" label="Административный округ" name="targetArea">
+          {/*TODO: Настроить поиск вне зависимости от регистра*/}
+          <Select
+            showSearch
+            placeholder="Введите административный округ"
+            optionFilterProp="item"
+            filterOption={(input, option) => (option?.label ?? '').includes(input)}
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+            }
+            options={admAreas.map((item, i) => {
+              return {value: i, label: item};
+            })}
+          />
+        </Form.Item>
+        <Divider className="mapForm__divider"/>
+        <Form.Item className="mapForm__item" label="Муниципалитет" name="targetDistrict">
+          <Input/>
+        </Form.Item>
+        <Divider className="mapForm__divider"/>
+        <Form.Item className="mapForm__item" label="Доступность (в метрах)" name="targetDoorstep">
+          <Input/>
+        </Form.Item>
+        <Divider className="mapForm__divider"/>
+        <Form.Item className="mapForm__item" label="Доступность (в метрах)" name="targetDoorstep">
+          <Input/>
+        </Form.Item>
+      </Form>
     </>
   );
 };
