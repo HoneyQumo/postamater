@@ -8,15 +8,16 @@ import {useSelector} from 'react-redux';
 const MapSidebar = () => {
   const AOData = useSelector(state => state.pointsList.AOData)
   const AOWithMOData = useSelector(state => state.pointsList.AOWithMOData)
-  const [districtList, setDistrictList] = useState(['Сначала укажите АО'])
+  const [districtList, setDistrictList] = useState([])
 
   const handleAOInputSelect = (value) => {
-    AOWithMOData.forEach((item, i) => {
+    AOWithMOData.forEach((item) => {
       if (Object.keys(item)[0] === value) {
         setDistrictList(item[value]);
       }
     })
   }
+
 
   const handleFormSubmit = (data) => {
     console.log(data);
@@ -56,10 +57,11 @@ const MapSidebar = () => {
           />
         </Form.Item>
         <Divider className="mapForm__divider"/>
-        <Form.Item className="mapForm__item" label="Муниципалитет" name="targetDistrict">
+        <Form.Item className="mapForm__item" label="Район" name="targetDistrict">
           <Select
             showSearch
-            placeholder={districtList.length === 1 ? "Сначала укажите АО" : "Укажите район"}
+            disabled={districtList.length === 0}
+            placeholder="Укажите район"
             optionFilterProp="item"
             filterOption={(input, option) => (option?.label ?? '').includes(input)}
             filterSort={(optionA, optionB) =>
