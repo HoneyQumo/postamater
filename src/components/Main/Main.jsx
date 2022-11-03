@@ -1,15 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Layout} from 'antd';
 
 import Content from '../Content/Content';
 
-import './Main.scss'
-import {Route, Routes} from 'react-router-dom';
+import './Main.scss';
 
 const Main = () => {
   return (
-    <Layout className='main'>
-      <Content />
+    <Layout className="main">
+      <Content/>
     </Layout>
   );
 };

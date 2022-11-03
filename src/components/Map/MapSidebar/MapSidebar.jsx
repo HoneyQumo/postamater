@@ -9,10 +9,26 @@ const MapSidebar = () => {
   const admAreas = useSelector(state => state.pointsList.admAreaList);
   const districtList = useSelector(state => state.pointsList.districtList);
 
+  const handleFormSubmit = (data) => {
+    console.log(data);
+    // const targetArea = data.targetArea;
+    // const targetDistrict = data.targetDistrict;
+    // const targetDoorstep = data.targetDoorstep;
+    // const targetCoverage = data.targetCoverage;
+    // const targetPostsNumber = data.targetPostsNumber;
+    //
+    // const fetchData = async () => {
+    //   const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
+    //   const data = await response.json()
+    //   console.log(data);
+    // };
+    // fetchData()
+  };
+
 
   return (
     <>
-      <Form layout="vertical" className="mapForm" onFinish={(e) => {console.log(e);}}>
+      <Form layout="vertical" className="mapForm" onFinish={handleFormSubmit}>
         <Form.Item className="mapForm__item" label="Административный округ" name="targetArea">
           {/*TODO: Настроить поиск вне зависимости от регистра*/}
           <Select
@@ -50,13 +66,15 @@ const MapSidebar = () => {
         <Divider className="mapForm__divider"/>
         <Form.Item className="mapForm__item" label="Охват населения Москвы (в %)" name="targetCoverage"
                    initialValue={10}>
-          <Slider min={1} max={100} marks={{0: {style: {color: 'black'}, label: '0%'}, 100: {style: {color: 'black'}, label: '100%'}}}
+          <Slider min={1} max={100}
+                  marks={{0: {style: {color: 'black'}, label: '0%'}, 100: {style: {color: 'black'}, label: '100%'}}}
                   trackStyle={{backgroundColor: '#cc2222'}}
                   handleStyle={{backgroundColor: '#cc2222', borderColor: 'lightgray'}}
           />
         </Form.Item>
         <Divider className="mapForm__divider"/>
-        <Form.Item className="mapForm__item" label="Целевое количество постаматов" name="targetPostsNumber" initialValue={50}>
+        <Form.Item className="mapForm__item" label="Целевое количество постаматов" name="targetPostsNumber"
+                   initialValue={50}>
           <InputNumber min={1} max={4000} style={{width: '100%'}} addonAfter="шт"/>
         </Form.Item>
         <Divider className="mapForm__divider"/>

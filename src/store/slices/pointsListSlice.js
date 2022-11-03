@@ -4,7 +4,7 @@ export const fetchPointsList = createAsyncThunk(
   'pointsList/fetchPointsList',
   async function () {
     try {
-      const response = await fetch('http://au-yakovlevnote.mipcnet.org:5000/arrangeKali/api/v1/get_points_list/arrangeId')
+      const response = await fetch('http://37.230.196.15/arrangeKali/api/v1/get_points_list/arrangeId')
       return await response.json()
 
     } catch (e) {
