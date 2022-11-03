@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Divider, Form, InputNumber, Select, Slider} from 'antd';
 
 import './MapSidebar.scss';
@@ -6,8 +6,17 @@ import {useSelector} from 'react-redux';
 
 
 const MapSidebar = () => {
-  const admAreas = useSelector(state => state.pointsList.admAreaList);
-  const districtList = useSelector(state => state.pointsList.districtList);
+  const AOData = useSelector(state => state.pointsList.AOData)
+  const AOWithMOData = useSelector(state => state.pointsList.AOWithMOData)
+  const [districtList, setDistrictList] = useState(['Сначала укажите АО'])
+
+  const handleAOInputSelect = (value) => {
+    AOWithMOData.forEach((item, i) => {
+      if (Object.keys(item)[0] === value) {
+        setDistrictList(item[value]);
+      }
+    })
+  }
 
   const handleFormSubmit = (data) => {
     console.log(data);
@@ -29,9 +38,10 @@ const MapSidebar = () => {
   return (
     <>
       <Form layout="vertical" className="mapForm" onFinish={handleFormSubmit}>
-        <Form.Item className="mapForm__item" label="Административный округ" name="targetArea">
+        <Form.Item className="mapForm__item" label="Административный округ" name="targetArea" >
           {/*TODO: Настроить поиск вне зависимости от регистра*/}
           <Select
+            onSelect={handleAOInputSelect}
             showSearch
             placeholder="Введите административный округ"
             optionFilterProp="item"
@@ -39,8 +49,9 @@ const MapSidebar = () => {
             filterSort={(optionA, optionB) =>
               (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
             }
-            options={admAreas.map((item) => {
-              return {value: item, label: item};
+            options={AOData.name.map((item, i) => {
+              //TODO: АККУРАТНО value: AOData.name, label: AOData.name + AOData.abbrev[i]
+              return {value: item, label: `${item} (${AOData.abbrev[i]})`};
             })}
           />
         </Form.Item>
@@ -48,7 +59,7 @@ const MapSidebar = () => {
         <Form.Item className="mapForm__item" label="Муниципалитет" name="targetDistrict">
           <Select
             showSearch
-            placeholder="Укажите район"
+            placeholder={districtList.length === 1 ? "Сначала укажите АО" : "Укажите район"}
             optionFilterProp="item"
             filterOption={(input, option) => (option?.label ?? '').includes(input)}
             filterSort={(optionA, optionB) =>

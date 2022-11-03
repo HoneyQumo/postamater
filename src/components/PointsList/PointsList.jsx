@@ -32,6 +32,8 @@ const PointsList = () => {
   }))];
 
   //TODO: Изменить ширину ячеек таблицы
+  //TODO: Поменять пагинацию, убратьи лишние кнопки
+
   return (
     <Table dataSource={data} scroll={{y: 'calc(100vh - 252px)'}} bordered pagination={{position: ['bottomCenter'] }}>
       <Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>

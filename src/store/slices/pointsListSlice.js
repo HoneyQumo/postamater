@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import mo from '../../geojson/mo.json';
 
 export const fetchPointsList = createAsyncThunk(
   'pointsList/fetchPointsList',
@@ -19,10 +20,30 @@ const pointsListSlice = createSlice({
     pointsListData: [],
     status: undefined,
     error: undefined,
-    admAreaList: [],
-    districtList: []
+    AOData: {name: [], abbrev: []},
+    AOWithMOData: []
   },
-  reducers: {},
+  reducers: {
+    getAODataFromGeoJSON(state, action) {
+      action.payload.features.forEach((item) => {
+        state.AOData.name.push(item.properties.NAME)
+        state.AOData.abbrev.push(item.properties.ABBREV)
+      })
+    },
+    setAOWithMODataFromGeoJSON(state, action) {
+      const MOData = [];
+      state.AOData.name.forEach((AO, i) => {
+        MOData.push({[AO]: []});
+
+        for (let a = 0; a < action.payload.features.length; a++) {
+          if (action.payload.features[a].properties.NAME_AO === AO) {
+            MOData[i][AO].push(action.payload.features[a].properties.NAME)
+          }
+        }
+      });
+      state.AOWithMOData = MOData
+    }
+  },
   extraReducers: {
     [fetchPointsList.pending]: (state) => {
       state.error = ''
@@ -32,22 +53,6 @@ const pointsListSlice = createSlice({
       state.error = ''
       state.status = 'fulfilled'
       state.pointsListData = action.payload.data
-
-      // Добавление в массив уникальных значений admArea
-      state.pointsListData.map((point) => {
-        if (!state.admAreaList.includes(point.admArea)) {
-          state.admAreaList.push(point.admArea)
-        }
-        return undefined
-      })
-
-      state.pointsListData.map((point) => {
-        if (!state.districtList.includes(point.district)) {
-          state.districtList.push(point.district)
-        }
-        return undefined
-      })
-
     },
     [fetchPointsList.rejected]: (state, action) => {
       state.error = action.payload
@@ -56,6 +61,6 @@ const pointsListSlice = createSlice({
   }
 })
 
-export const {filterAdmArea} = pointsListSlice.actions
+export const {filterAdmArea, getAODataFromGeoJSON, setAOWithMODataFromGeoJSON} = pointsListSlice.actions
 
 export default pointsListSlice.reducer

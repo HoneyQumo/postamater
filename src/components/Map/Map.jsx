@@ -2,13 +2,22 @@ import React, {useEffect, useState} from 'react';
 import Iframe from 'react-iframe';
 import {LoadingOutlined} from '@ant-design/icons';
 import {Col, Row} from 'antd';
+import {useDispatch} from 'react-redux';
 
 import './Map.scss';
+import ao from '../../geojson/ao.json';
+import mo from '../../geojson/mo.json';
 import MapSidebar from './MapSidebar/MapSidebar';
+import {getAODataFromGeoJSON, setAOWithMODataFromGeoJSON} from '../../store/slices/pointsListSlice';
 
 const Map = () => {
   const [loader, setLoader] = useState(true);
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch(getAODataFromGeoJSON(ao))
+    dispatch(setAOWithMODataFromGeoJSON(mo))
+  }, [ao])
 
   useEffect( () => {
     const fetchData = async () => {
