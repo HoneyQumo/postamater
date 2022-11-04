@@ -58,15 +58,24 @@ const MapSidebar = () => {
         </Form.Item>
         <Divider className="mapForm__divider"/>
         <Form.Item className="mapForm__item" label="Район" name="targetDistrict">
+          {/*<Select*/}
+          {/*  showSearch*/}
+          {/*  disabled={districtList.length === 0}*/}
+          {/*  placeholder="Укажите район"*/}
+          {/*  optionFilterProp="item"*/}
+          {/*  filterOption={(input, option) => (option?.label ?? '').includes(input)}*/}
+          {/*  filterSort={(optionA, optionB) =>*/}
+          {/*    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())*/}
+          {/*  }*/}
+          {/*  options={districtList.map((item) => {*/}
+          {/*    return {value: item, label: item};*/}
+          {/*  })}*/}
+          {/*/>*/}
           <Select
-            showSearch
+            mode='multiple'
+            allowClear
+            placeholder={districtList.length === 0 ? 'Сначала выберите АО' : 'Укажите район(ы)'}
             disabled={districtList.length === 0}
-            placeholder="Укажите район"
-            optionFilterProp="item"
-            filterOption={(input, option) => (option?.label ?? '').includes(input)}
-            filterSort={(optionA, optionB) =>
-              (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-            }
             options={districtList.map((item) => {
               return {value: item, label: item};
             })}
