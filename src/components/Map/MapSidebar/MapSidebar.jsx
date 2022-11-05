@@ -1,45 +1,39 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Button, Divider, Form, InputNumber, Select, Slider} from 'antd';
 
 import './MapSidebar.scss';
 import {useSelector} from 'react-redux';
+import {logDOM} from '@testing-library/react';
 
 
 const MapSidebar = () => {
-  const AOData = useSelector(state => state.pointsList.AOData)
-  const AOWithMOData = useSelector(state => state.pointsList.AOWithMOData)
-  const [districtList, setDistrictList] = useState([])
+  const AOData = useSelector(state => state.pointsList.AOData);
+  const AOWithMOData = useSelector(state => state.pointsList.AOWithMOData);
+  const [targetDistrict, setTargetDistrict] = useState([]);
 
   const handleAOInputSelect = (value) => {
-    AOWithMOData.forEach((item) => {
-      if (Object.keys(item)[0] === value) {
-        setDistrictList(item[value]);
-      }
-    })
-  }
-
-
-  const handleFormSubmit = (data) => {
-    console.log(data);
-    // const targetArea = data.targetArea;
-    // const targetDistrict = data.targetDistrict;
-    // const targetDoorstep = data.targetDoorstep;
-    // const targetCoverage = data.targetCoverage;
-    // const targetPostsNumber = data.targetPostsNumber;
-    //
-    // const fetchData = async () => {
-    //   const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
-    //   const data = await response.json()
-    //   console.log(data);
-    // };
-    // fetchData()
+    setTargetDistrict([]);
+    const findDist = AOWithMOData.find((item) => Object.keys(item)[0] === value);
+    setTargetDistrict(findDist[value].map((item) => ({value: item, label: item})));
   };
 
+
+  const handleFormSubmit = (formData) => {
+    console.log(formData);
+    const {targetArea,targetDistrict, targetDoorstep, targetCoverage, targetPostsNumber } = formData;
+
+    const fetchData = async () => {
+      const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
+      const data = await response.json();
+      console.log(data);
+    };
+    fetchData();
+  };
 
   return (
     <>
       <Form layout="vertical" className="mapForm" onFinish={handleFormSubmit}>
-        <Form.Item className="mapForm__item" label="Административный округ" name="targetArea" >
+        <Form.Item className="mapForm__item" label="Административный округ" name="targetArea">
           {/*TODO: Настроить поиск вне зависимости от регистра*/}
           <Select
             onSelect={handleAOInputSelect}
@@ -58,27 +52,14 @@ const MapSidebar = () => {
         </Form.Item>
         <Divider className="mapForm__divider"/>
         <Form.Item className="mapForm__item" label="Район" name="targetDistrict">
-          {/*<Select*/}
-          {/*  showSearch*/}
-          {/*  disabled={districtList.length === 0}*/}
-          {/*  placeholder="Укажите район"*/}
-          {/*  optionFilterProp="item"*/}
-          {/*  filterOption={(input, option) => (option?.label ?? '').includes(input)}*/}
-          {/*  filterSort={(optionA, optionB) =>*/}
-          {/*    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())*/}
-          {/*  }*/}
-          {/*  options={districtList.map((item) => {*/}
-          {/*    return {value: item, label: item};*/}
-          {/*  })}*/}
-          {/*/>*/}
           <Select
-            mode='multiple'
+            onClear={(e) => {console.log(e);}}
+            mode="multiple"
             allowClear
-            placeholder={districtList.length === 0 ? 'Сначала выберите АО' : 'Укажите район(ы)'}
-            disabled={districtList.length === 0}
-            options={districtList.map((item) => {
-              return {value: item, label: item};
-            })}
+            placeholder={targetDistrict.length === 0 ? 'Сначала выберите АО' : 'Укажите район(ы)'}
+            disabled={targetDistrict.length === 0}
+            options={targetDistrict}
+
           />
         </Form.Item>
         <Divider className="mapForm__divider"/>
