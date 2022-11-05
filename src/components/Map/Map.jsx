@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import Iframe from 'react-iframe';
 import {LoadingOutlined} from '@ant-design/icons';
 import {Col, Row} from 'antd';
@@ -14,7 +14,7 @@ const Map = () => {
   const [loader, setLoader] = useState(true);
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getAODataFromGeoJSON(ao))
     dispatch(setAOWithMODataFromGeoJSON(mo))
   }, [ao])

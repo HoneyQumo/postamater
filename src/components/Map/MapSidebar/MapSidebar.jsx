@@ -1,21 +1,21 @@
 import React, {useRef, useState} from 'react';
-import {Button, Checkbox, Divider, Form, InputNumber, Radio, Select, Slider} from 'antd';
+import {Button, Checkbox, Divider, Form, InputNumber, Select, Slider} from 'antd';
 
 import './MapSidebar.scss';
 import {useSelector} from 'react-redux';
 
 
 const MapSidebar = () => {
-  const refForm = useRef();
   const AOData = useSelector(state => state.pointsList.AOData);
   const AOWithMOData = useSelector(state => state.pointsList.AOWithMOData);
-  const [targetDistrict, setTargetDistrict] = useState([]);
+  const [targetDistrictList, setTargetDistrictList] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const refForm = useRef(null);
 
 
   const handleAOInputSelect = (value) => {
     const findDist = AOWithMOData.find((item) => Object.keys(item)[0] === value);
-    setTargetDistrict(findDist[value].map((item) => ({value: item, label: item})));
+    setTargetDistrictList(findDist[value].map((item) => ({value: item, label: item})));
   };
 
   const handleCheckboxToggle = (event) => {
@@ -29,13 +29,12 @@ const MapSidebar = () => {
     if (selectAll) {
       refForm.current.setFieldValue('targetArea', AOData.name);
       const tempArr = [];
-      AOWithMOData.map((item) => {
+      AOWithMOData.forEach((item) => {
         const temp = Object.values(item)[0];
         tempArr.push(...temp);
       });
       refForm.current.setFieldValue('targetDistrict', tempArr);
     }
-
 
     const fetchOrderId = async () => {
       const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
@@ -43,7 +42,7 @@ const MapSidebar = () => {
       console.log(resData);
     };
     fetchOrderId();
-    refForm.current.resetFields()
+    // refForm.current.resetFields();
   };
 
 
@@ -51,7 +50,7 @@ const MapSidebar = () => {
     <>
       <Form layout="vertical" className="mapForm" onFinish={handleFormSubmit} ref={refForm}>
         <Form.Item className="mapForm__item" label="Административный округ" name="targetArea">
-          <Checkbox onChange={handleCheckboxToggle} checked={selectAll}>Выбрать все АО</Checkbox>
+          {/*<Checkbox onChange={handleCheckboxToggle} checked={selectAll}>Выбрать все АО</Checkbox>*/}
           <Select
             disabled={selectAll}
             onSelect={handleAOInputSelect}
@@ -74,9 +73,9 @@ const MapSidebar = () => {
             mode="multiple"
             allowClear
             maxTagCount="responsive"
-            placeholder={targetDistrict.length === 0 ? 'Сначала выберите АО' : 'Укажите район(ы)'}
+            placeholder={targetDistrictList.length === 0 ? 'Сначала выберите АО' : 'Укажите район(ы)'}
             disabled={selectAll}
-            options={targetDistrict}
+            options={targetDistrictList}
           />
         </Form.Item>
         <Divider className="mapForm__divider"/>
