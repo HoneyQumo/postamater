@@ -14,7 +14,6 @@ const MapSidebar = () => {
   const typesObject = ['Киоски', 'МФЦ', 'Библиотеки', 'Дома культуры', 'Спортивные объекты'];
   const refForm = useRef(null);
 
-
   const handleAOInputSelect = (value) => {
     const findDist = AOWithMOData.find((item) => Object.keys(item)[0] === value);
     setTargetDistrictList(findDist[value].map((item) => ({value: item, label: item})));

@@ -5,7 +5,6 @@ import {Table, Typography} from 'antd';
 
 import './PointsList.scss';
 
-
 const PointsList = () => {
   const pointsList = useSelector(state => state.pointsList.pointsListData);
   console.log(pointsList);
