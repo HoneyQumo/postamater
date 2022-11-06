@@ -32,16 +32,15 @@ const PointsList = () => {
   }))];
 
   //TODO: Изменить ширину ячеек таблицы
-  //TODO: Поменять пагинацию, убратьи лишние кнопки
 
   return (
-    <Table dataSource={data} scroll={{y: 'calc(100vh - 252px)'}} bordered pagination={{position: ['bottomCenter'], simple: true }}>
+    <Table dataSource={data} scroll={{y: 'calc(100vh - 244px)'}} bordered pagination={{position: ['bottomCenter'], simple: true }}>
       <Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>
       <Table.Column title="Район" dataIndex="district" key="district"/>
-      <Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate"/>
+      <Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate" sorter={(a,b) => a.modelPointRate - b.modelPointRate} showSorterTooltip={false} />
       <Table.Column title="Адрес" dataIndex="nearestAddress" key="nearestAddress"/>
       <Table.Column title="Название" dataIndex="nearestObject" key="nearestObject"/>
-      <Table.Column title="Кол-во посетителей" dataIndex="nearestVisitors" key="nearestVisitors"/>
+      <Table.Column title="Кол-во посетителей" dataIndex="nearestVisitors" key="nearestVisitors" />
       <Table.Column title="Время работы" dataIndex="nearestWorkingTime" key="nearestWorkingTime"
                     render={(_, record) => {
                       const timeSplitted = record.nearestWorkingTime.split(',');
@@ -50,10 +49,10 @@ const PointsList = () => {
                           ellipsis={{expandable: true, rows: 1, symbol: 'раскрыть'}}
                           style={{margin: 0}}
                         >
-                          {timeSplitted.map(time => (
-                            <>
+                          {timeSplitted.map((time,i) => (
+                            <p style={{margin: 0}} key={i}>
                               {`${time}`} <br/>
-                            </>
+                            </p>
                           ))}
                         </Typography.Paragraph>
                       );

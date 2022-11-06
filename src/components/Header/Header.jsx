@@ -18,7 +18,7 @@ const Header = () => {
       <Row className="header__menu menu">
         <div className="menu__links">
           <NavLink to="/map" className="menu__link">Карта</NavLink>
-          <NavLink to="/points-list" className="menu__link">Таблица значений</NavLink>
+          <NavLink to="/points-list" className="menu__link">Таблица результатов</NavLink>
         </div>
       </Row>
     </Layout.Header>
