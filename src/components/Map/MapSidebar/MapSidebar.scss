@@ -14,7 +14,8 @@
   // .mapForm__buttons
   &__buttons{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    //justify-content: flex-end;
   }
   // .mapForm__button
   &__button{
@@ -24,6 +25,17 @@
     &:hover,&:focus {
       border-color: #FA2222;
       background-color: #FA2222;
+    }
+  }
+  &__button-reset{
+    border-color: #CC2222;
+    background-color: transparent;
+    color: #CC2222;
+
+    &:hover,&:focus {
+      border-color: #FA2222;
+      background-color: transparent;
+      color: #FA2222;
     }
   }
 }

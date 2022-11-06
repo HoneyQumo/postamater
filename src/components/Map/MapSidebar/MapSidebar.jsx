@@ -10,6 +10,7 @@ const MapSidebar = () => {
   const AOWithMOData = useSelector(state => state.pointsList.AOWithMOData);
   const [targetDistrictList, setTargetDistrictList] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const typesObject = ['Киоски', 'МФЦ', 'Библиотеки', 'Дома культуры', 'Спортивные объекты'];
   const refForm = useRef(null);
 
 
@@ -22,9 +23,13 @@ const MapSidebar = () => {
     setSelectAll(event.target.checked);
   };
 
+  const onReset = () => {
+    refForm.current.resetFields();
+  };
+
   const handleFormSubmit = (formData) => {
     console.log(formData);
-    const {targetArea, targetDistrict, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
+    const {targetArea, targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
 
     if (selectAll) {
       refForm.current.setFieldValue('targetArea', AOData.name);
@@ -34,10 +39,12 @@ const MapSidebar = () => {
         tempArr.push(...temp);
       });
       refForm.current.setFieldValue('targetDistrict', tempArr);
+      refForm.current.setFieldValue('typeObject', typesObject);
+
     }
 
     const fetchOrderId = async () => {
-      const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
+      const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&typeObject=${typeObject}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
       const resData = await response.json();
       console.log(resData);
     };
@@ -45,12 +52,13 @@ const MapSidebar = () => {
     // refForm.current.resetFields();
   };
 
-
   return (
     <>
       <Form layout="vertical" className="mapForm" onFinish={handleFormSubmit} ref={refForm}>
+        <Form.Item className="mapForm__item" name="selectAll">
+          <Checkbox onChange={handleCheckboxToggle} checked={selectAll} value={selectAll}>Выбрать все</Checkbox>
+        </Form.Item>
         <Form.Item className="mapForm__item" label="Административный округ" name="targetArea">
-          {/*<Checkbox onChange={handleCheckboxToggle} checked={selectAll}>Выбрать все АО</Checkbox>*/}
           <Select
             disabled={selectAll}
             onSelect={handleAOInputSelect}
@@ -79,6 +87,19 @@ const MapSidebar = () => {
           />
         </Form.Item>
         <Divider className="mapForm__divider"/>
+        <Form.Item className="mapForm__item" label="Тип объекта" name="typeObject">
+          <Select
+            mode="multiple"
+            allowClear
+            maxTagCount="responsive"
+            placeholder="Выберите тип объекта"
+            disabled={selectAll}
+            options={typesObject.map((item) => {
+              return {value: item, label: item};
+            })}
+          />
+        </Form.Item>
+        <Divider className="mapForm__divider"/>
         <Form.Item className="mapForm__item" label="Доступность (в метрах)" name="targetDoorstep" initialValue={100}>
           <InputNumber min={1} max={3000} style={{width: '100%'}} addonAfter="метров"/>
         </Form.Item>
@@ -97,8 +118,17 @@ const MapSidebar = () => {
           <InputNumber min={1} max={4000} style={{width: '100%'}} addonAfter="шт"/>
         </Form.Item>
         <Divider className="mapForm__divider"/>
-        <Form.Item className="mapForm__item mapForm__buttons">
-          <Button type="primary" htmlType="submit" className="mapForm__button">Отправить</Button>
+        <Form.Item className="mapForm__item"  >
+          <div className=" mapForm__buttons">
+            <Button type="primary"
+                    htmlType="button"
+                    className="mapForm__button-reset"
+                    onClick={onReset}
+            >
+              Очистить
+            </Button>
+            <Button type="primary" htmlType="submit" className="mapForm__button">Отправить</Button>
+          </div>
         </Form.Item>
       </Form>
     </>
