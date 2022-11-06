@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Table, Typography} from 'antd';
 
@@ -8,6 +8,8 @@ import './PointsList.scss';
 const PointsList = () => {
   const pointsList = useSelector(state => state.pointsList.pointsListData);
   console.log(pointsList);
+
+
 
   // const columns = [
   //   {Title: 'admArea', dataIndex: 'admArea', key: 'admArea'},
@@ -33,7 +35,7 @@ const PointsList = () => {
   //TODO: Изменить ширину ячеек таблицы
 
   return (
-    <Table dataSource={data} scroll={{y: 'calc(100vh - 244px)'}} bordered pagination={{position: ['bottomCenter'], simple: true }}>
+    <Table dataSource={data} scroll={{y: 'calc(100vh - 244px)'}} bordered pagination={{position: ['bottomCenter'], simple: true }} loading={pointsList.length === 0} >
       <Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>
       <Table.Column title="Район" dataIndex="district" key="district"/>
       <Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate" sorter={(a,b) => a.modelPointRate - b.modelPointRate} showSorterTooltip={false} />
