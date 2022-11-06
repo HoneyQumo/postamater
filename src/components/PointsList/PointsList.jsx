@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Table, Typography} from 'antd';
+import {Table} from 'antd';
 
 
 import './PointsList.scss';

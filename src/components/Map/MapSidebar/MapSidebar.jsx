@@ -39,7 +39,7 @@ const MapSidebar = () => {
   };
 
   const handleFormSubmit = (formData) => {
-    let {targetArea, targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
+    let {targetArea, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
 
     const formDataTemp = {
       targetArea,

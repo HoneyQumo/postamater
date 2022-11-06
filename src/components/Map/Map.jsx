@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Row} from 'antd';
-import {YMaps, Map as DMap, Placemark, Clusterer} from '@pbe/react-yandex-maps';
+import {YMaps, Map as DMap, Placemark} from '@pbe/react-yandex-maps';
 
 import './Map.scss';
 import MapSidebar from './MapSidebar/MapSidebar';
 import {useSelector} from 'react-redux';
 
 const Map = () => {
-  const [loader, setLoader] = useState(true);
+  // const [loader, setLoader] = useState(true);
   const [dataOrderMap, setDataOrderMap] = useState([]);
   const dataOrder = useSelector(state => state.pointsList.dataOrder.map.features);
   console.log('dataOrder: ', dataOrder);
