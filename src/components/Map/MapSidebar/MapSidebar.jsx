@@ -2,8 +2,9 @@ import React, {useRef, useState} from 'react';
 import {Button, Checkbox, Divider, Form, InputNumber, Select, Slider} from 'antd';
 
 import './MapSidebar.scss';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ExportToCSV from '../../ExportCSV/ExportCSV';
+import {fetchOrderId} from '../../../store/slices/pointsListSlice';
 
 
 const MapSidebar = () => {
@@ -13,6 +14,7 @@ const MapSidebar = () => {
   const [selectAll, setSelectAll] = useState(false);
   const typesObject = ['Киоски', 'МФЦ', 'Библиотеки', 'Дома культуры', 'Спортивные объекты'];
   const refForm = useRef(null);
+  const dispatch = useDispatch()
 
   const handleAOInputSelect = (value) => {
     const findDist = AOWithMOData.find((item) => Object.keys(item)[0] === value);
@@ -28,8 +30,7 @@ const MapSidebar = () => {
   };
 
   const handleFormSubmit = (formData) => {
-    console.log(formData);
-    const {targetArea, targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
+    // const {targetArea, targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
 
     if (selectAll) {
       refForm.current.setFieldValue('targetArea', AOData.name);
@@ -42,13 +43,7 @@ const MapSidebar = () => {
       refForm.current.setFieldValue('typeObject', typesObject);
 
     }
-
-    const fetchOrderId = async () => {
-      const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&typeObject=${typeObject}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
-      const resData = await response.json();
-      console.log(resData);
-    };
-    fetchOrderId();
+    dispatch(fetchOrderId(formData))
     // refForm.current.resetFields();
   };
 

@@ -1,14 +1,16 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import mo from '../../geojson/mo.json';
 
-export const fetchPointsList = createAsyncThunk(
-  'pointsList/fetchPointsList',
-  async function () {
+export const fetchOrderId = createAsyncThunk(
+  'pointsList/fetchOrderId',
+  async function(formData) {
     try {
-      const response = await fetch('http://37.230.196.15/arrangeKali/api/v1/get_points_list/arrangeId')
-      return await response.json()
-
-    } catch (e) {
+      console.log(formData);
+      const {targetArea, targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
+      const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&typeObject=${typeObject}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
+      const resData = await response.json();
+      console.log(resData);
+      return resData
+    }catch (e) {
       throw new Error(e)
     }
   }
@@ -17,11 +19,12 @@ export const fetchPointsList = createAsyncThunk(
 const pointsListSlice = createSlice({
   name: 'pointsList',
   initialState: {
-    pointsListData: [],
-    status: undefined,
-    error: undefined,
     AOData: {name: [], abbrev: []},
-    AOWithMOData: []
+    AOWithMOData: [],
+    orderId: undefined,
+    dataOrder: [],
+    statusOrder: undefined,
+    errorOrder: undefined
   },
   reducers: {
     getAODataFromGeoJSON(state, action) {
@@ -45,22 +48,25 @@ const pointsListSlice = createSlice({
     }
   },
   extraReducers: {
-    [fetchPointsList.pending]: (state) => {
-      state.error = ''
-      state.status = 'pending'
+    [fetchOrderId.pending]: (state, action) => {
+      state.errorOrder = ''
+      state.statusOrder = 'pending'
     },
-    [fetchPointsList.fulfilled]: (state, action) => {
-      state.error = ''
-      state.status = 'fulfilled'
-      state.pointsListData = action.payload.data
+    [fetchOrderId.fulfilled]: (state, action) => {
+      state.errorOrder = ''
+      state.statusOrder = 'fulfilled'
+      state.orderId = action.payload.arrangeId
+      state.dataOrder = action.payload.data
+
+
     },
-    [fetchPointsList.rejected]: (state, action) => {
-      state.error = action.payload
-      state.status = 'rejected'
-    }
+    [fetchOrderId.rejected]: (state, action) => {
+      state.errorOrder = action.payload
+      state.statusOrder = 'rejected'
+    },
   }
 })
 
-export const {filterAdmArea, getAODataFromGeoJSON, setAOWithMODataFromGeoJSON} = pointsListSlice.actions
+export const {getAODataFromGeoJSON, setAOWithMODataFromGeoJSON} = pointsListSlice.actions
 
 export default pointsListSlice.reducer

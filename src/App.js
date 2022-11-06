@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import {useDispatch} from 'react-redux';
-import {fetchPointsList, getAODataFromGeoJSON, setAOWithMODataFromGeoJSON} from './store/slices/pointsListSlice';
+import {getAODataFromGeoJSON, setAOWithMODataFromGeoJSON} from './store/slices/pointsListSlice';
 
 import './App.scss';
 import ao from './geojson/ao.json';
@@ -15,7 +15,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
-    dispatch(fetchPointsList());
     dispatch(getAODataFromGeoJSON(ao))
     dispatch(setAOWithMODataFromGeoJSON(mo))
   }, [dispatch]);

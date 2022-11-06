@@ -1,29 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CSVDownload from 'react-csv/src/components/Download';
 import {CSVLink} from 'react-csv';
 import {useSelector} from 'react-redux';
+import {Table} from 'antd';
 
 const ExportToCSV = () => {
-  const pointsList = useSelector(state => state.pointsList.pointsListData);
+  const dataOrder = useSelector(state => state.pointsList.dataOrder.table);
+  const [dataOrderTable, setDataOrderTable] = useState([])
+
+  useEffect(() => {
+    if (dataOrder) {
+      setDataOrderTable(dataOrder)
+    }
+  }, [dataOrder])
+
 
   const headers = [
-    {label: 'Административный округ', key: 'admArea'},
-    {label: 'Район', key: 'district'},
-    {label: 'Показатель востребованности', key: 'modelPointRate'},
-    {label: 'Адрес', key: 'nearestAddress'},
-    {label: 'Название', key: 'nearestAddress'},
-    {label: 'Кол-во посетителей', key: 'nearestVisitors'},
-    {label: 'Время работы', key: 'nearestWorkingTime'},
+    {label: 'Тип объекта', key: 'category'},
+    {label: 'Полное название', key: 'commonName'},
+    {label: 'Трафик (Целевой показатель)', key: 'flatsVolume'},
+    {label: 'Показатель востребованности', key: 'trafficRate'},
   ];
 
-  const data = [...pointsList.map(points => ({
-    admArea: points.admArea,
-    district: points.district,
-    modelPointRate: points.modelPointRate,
-    nearestAddress: points.nearestAddress,
-    nearestObject: points.nearestObject,
-    nearestVisitors: points.nearestVisitors,
-    nearestWorkingTime: points.nearestWorkingTime,
+  const data = [...dataOrderTable.map(points => ({
+    category: points.category,
+    commonName: points.commonname,
+    flatsVolume: points.flatsvolume,
+    trafficRate: points.trafficrate,
   }))];
 
   return (
