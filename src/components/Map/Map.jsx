@@ -13,7 +13,7 @@ const Map = () => {
   console.log('dataOrder: ', dataOrder);
 
   useEffect(() => {
-    setLoader(true);
+    // setLoader(true);
     if (dataOrder) {
       setDataOrderMap(dataOrder);
     }
