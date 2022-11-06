@@ -1,5 +1,5 @@
 .mapForm {
-  padding: 7.5px;
+  //padding: 7.5px;
 
   // .mapForm__item
   &__item {
@@ -38,4 +38,18 @@
       color: #FA2222;
     }
   }
+}
+
+.sidebar{
+  //&__exportButton {
+  //  border-color: #CC2222;
+  //  background-color: transparent;
+  //  color: #CC2222;
+  //
+  //  &:hover,&:focus {
+  //    border-color: #FA2222;
+  //    background-color: transparent;
+  //    color: #FA2222;
+  //  }
+  //}
 }

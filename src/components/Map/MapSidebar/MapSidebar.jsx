@@ -3,6 +3,7 @@ import {Button, Checkbox, Divider, Form, InputNumber, Select, Slider} from 'antd
 
 import './MapSidebar.scss';
 import {useSelector} from 'react-redux';
+import ExportToCSV from '../../ExportCSV/ExportCSV';
 
 
 const MapSidebar = () => {
@@ -131,6 +132,9 @@ const MapSidebar = () => {
           </div>
         </Form.Item>
       </Form>
+      <Button type={'primary'} block ghost>
+        <ExportToCSV />
+      </Button>
     </>
   );
 };
