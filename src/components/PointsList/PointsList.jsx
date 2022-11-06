@@ -8,7 +8,6 @@ import './PointsList.scss';
 const PointsList = () => {
   const dataOrder = useSelector(state => state.pointsList.dataOrder.table);
   const [dataOrderTable, setDataOrderTable] = useState([])
-  console.log('dataOrder: ',dataOrder);
 
   useEffect(() => {
     if (dataOrder) {
