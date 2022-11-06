@@ -108,7 +108,7 @@ const MapSidebar = () => {
         <Form.Item className="mapForm__item" label="Охват населения Москвы (в %)" name="targetCoverage"
                    initialValue={10}>
           <Slider min={1} max={100}
-                  marks={{0: {style: {color: 'black'}, label: '0%'}, 100: {style: {color: 'black'}, label: '100%'}}}
+                  marks={{0: {style: {color: 'black', paddingLeft: '15px'}, label: '0%'}, 100: {style: {color: 'black',  paddingRight: '15px'}, label: '100%'}}}
                   trackStyle={{backgroundColor: '#cc2222'}}
                   handleStyle={{backgroundColor: '#cc2222', borderColor: 'lightgray'}}
           />
