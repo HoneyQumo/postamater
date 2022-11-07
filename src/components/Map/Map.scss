@@ -4,7 +4,10 @@
 
   // .map__sidebar
   .sidebar {
-    padding: 10px;
+    padding: 5px 10px 10px 10px;
+    max-height: calc(100vh - 132px);
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   // .map__content
@@ -16,16 +19,4 @@
 }
 
 .content {
-  width: 100%;
-  // .content__loader
-  &__loader {
-    font-size: 50px;
-    color: #CC2222;
-  }
-
-  // .content__iFrame
-  &__iFrame {
-    height: calc(100vh - 132px);
-    border: 0;
-  }
 }

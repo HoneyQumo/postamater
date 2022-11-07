@@ -1,6 +1,19 @@
 .customTable {
   height: calc(100vh - 244px);
+  ::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
 
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(#333, .4);
+    border: 3px solid transparent;
+    border-radius: 4px;
+  }
   tbody {
     height: calc(100vh - 244px);
     tr {

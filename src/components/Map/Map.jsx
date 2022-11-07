@@ -7,13 +7,11 @@ import MapSidebar from './MapSidebar/MapSidebar';
 import {useSelector} from 'react-redux';
 
 const Map = () => {
-  // const [loader, setLoader] = useState(true);
   const [dataOrderMap, setDataOrderMap] = useState([]);
   const dataOrder = useSelector(state => state.pointsList.dataOrder.map.features);
   console.log('dataOrder: ', dataOrder);
 
   useEffect(() => {
-    // setLoader(true);
     if (dataOrder) {
       setDataOrderMap(dataOrder);
     }
