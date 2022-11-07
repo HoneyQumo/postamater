@@ -6,7 +6,7 @@ export const fetchOrderId = createAsyncThunk(
     try {
       console.log(formData);
       const {targetArea, targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
-      const response = await fetch(`http://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&typeObject=${typeObject}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
+      const response = await fetch(`https://37.230.196.15/arrangeKali/api/v1/postArrangeOrder/?targetArea=${targetArea}&targetDistrict=${targetDistrict}&typeObject=${typeObject}&targetDoorstep=${targetDoorstep}&targetCoverage=${targetCoverage}&targetPostsNumber=${targetPostsNumber}`);
       const resData = await response.json();
       console.log(resData);
       return resData
@@ -48,7 +48,7 @@ const pointsListSlice = createSlice({
     }
   },
   extraReducers: {
-    [fetchOrderId.pending]: (state, action) => {
+    [fetchOrderId.pending]: (state) => {
       state.errorOrder = ''
       state.statusOrder = 'pending'
     },

@@ -24,14 +24,18 @@ const MapSidebar = () => {
   const handleCheckboxToggle = (event) => {
     setSelectAll(event.target.checked);
 
-    refForm.current.setFieldValue('targetArea', AOData.name);
-    const tempArr = [];
-    AOWithMOData.forEach((item) => {
-      const temp = Object.values(item)[0];
-      tempArr.push(...temp);
-    });
-    refForm.current.setFieldValue('targetDistrict', tempArr);
-    refForm.current.setFieldValue('typeObject', typesObject);
+    if (event.target.checked) {
+      refForm.current.setFieldValue('targetArea', AOData.name);
+      const tempArr = [];
+      AOWithMOData.forEach((item) => {
+        const temp = Object.values(item)[0];
+        tempArr.push(...temp);
+      });
+      refForm.current.setFieldValue('targetDistrict', tempArr);
+      refForm.current.setFieldValue('typeObject', typesObject);
+    } else {
+      refForm.current.resetFields();
+    }
   };
 
   const onReset = () => {
@@ -39,16 +43,21 @@ const MapSidebar = () => {
   };
 
   const handleFormSubmit = (formData) => {
-    let {targetArea, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
+    let {targetArea,targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
 
     const formDataTemp = {
       targetArea,
-      targetDistrict: '',
+      targetDistrict,
       typeObject,
       targetDoorstep,
       targetCoverage,
       targetPostsNumber
     }
+
+    if (selectAll) {
+      formDataTemp.targetDistrict = ''
+    }
+
 
     dispatch(fetchOrderId(formDataTemp))
     // refForm.current.resetFields();
