@@ -14,7 +14,7 @@ const MapSidebar = () => {
   const [selectAll, setSelectAll] = useState(false);
   const typesObject = ['Киоски', 'МФЦ', 'Библиотеки', 'Дома культуры', 'Спортивные объекты'];
   const refForm = useRef(null);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleAOInputSelect = (value) => {
     const findDist = AOWithMOData.find((item) => Object.keys(item)[0] === value);
@@ -43,7 +43,7 @@ const MapSidebar = () => {
   };
 
   const handleFormSubmit = (formData) => {
-    let {targetArea,targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
+    let {targetArea, targetDistrict, typeObject, targetDoorstep, targetCoverage, targetPostsNumber} = formData;
 
     const formDataTemp = {
       targetArea,
@@ -52,10 +52,29 @@ const MapSidebar = () => {
       targetDoorstep,
       targetCoverage,
       targetPostsNumber
-    }
+    };
 
     if (selectAll) {
-      formDataTemp.targetDistrict = ''
+      formDataTemp.targetDistrict = '';
+    }
+
+    if (typeof formDataTemp.targetArea === 'undefined') {
+      formDataTemp.targetArea = '';
+    }
+    if (typeof formDataTemp.targetDistrict === 'undefined') {
+      formDataTemp.targetDistrict = '';
+    }
+    if (typeof formDataTemp.typeObject === 'undefined') {
+      formDataTemp.typeObject = '';
+    }
+    if (typeof formDataTemp.targetDoorstep === 'undefined') {
+      formDataTemp.targetDoorstep = '';
+    }
+    if (typeof formDataTemp.targetCoverage === 'undefined') {
+      formDataTemp.targetCoverage = '';
+    }
+    if (typeof formDataTemp.targetPostsNumber === 'undefined') {
+      formDataTemp.targetPostsNumber = '';
     }
 
 
@@ -118,7 +137,10 @@ const MapSidebar = () => {
         <Form.Item className="mapForm__item" label="Охват населения Москвы (в %)" name="targetCoverage"
                    initialValue={10}>
           <Slider min={1} max={100}
-                  marks={{0: {style: {color: 'black', paddingLeft: '15px'}, label: '0%'}, 100: {style: {color: 'black',  paddingRight: '15px'}, label: '100%'}}}
+                  marks={{
+                    0: {style: {color: 'black', paddingLeft: '15px'}, label: '0%'},
+                    100: {style: {color: 'black', paddingRight: '15px'}, label: '100%'}
+                  }}
                   trackStyle={{backgroundColor: '#cc2222'}}
                   handleStyle={{backgroundColor: '#cc2222', borderColor: 'lightgray'}}
           />
@@ -129,7 +151,7 @@ const MapSidebar = () => {
           <InputNumber min={1} max={4000} style={{width: '100%'}} addonAfter="шт"/>
         </Form.Item>
         <Divider className="mapForm__divider"/>
-        <Form.Item className="mapForm__item"  >
+        <Form.Item className="mapForm__item">
           <div className=" mapForm__buttons">
             <Button type="primary"
                     htmlType="button"
@@ -143,7 +165,7 @@ const MapSidebar = () => {
         </Form.Item>
       </Form>
       <Button type={'primary'} block ghost>
-        <ExportToCSV />
+        <ExportToCSV/>
       </Button>
     </>
   );
