@@ -17,6 +17,7 @@ const MapSidebar = () => {
   const dispatch = useDispatch();
 
   const handleAOInputSelect = (value) => {
+    refForm.current.setFieldValue('targetDistrict', undefined);
     const findDist = AOWithMOData.find((item) => Object.keys(item)[0] === value);
     setTargetDistrictList(findDist[value].map((item) => ({value: item, label: item})));
   };
@@ -76,7 +77,6 @@ const MapSidebar = () => {
     if (typeof formDataTemp.targetPostsNumber === 'undefined') {
       formDataTemp.targetPostsNumber = '';
     }
-
 
     dispatch(fetchOrderId(formDataTemp))
     // refForm.current.resetFields();
