@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Table} from 'antd';
 
-
 import './PointsList.scss';
 
 const PointsList = () => {
@@ -20,14 +19,15 @@ const PointsList = () => {
     commonName: points.commonname,
     flatsVolume: points.flatsvolume,
     trafficRate: points.trafficrate,
+    coordinates: `${points.lat}, ${points.lon}`,
     key: i
   }))];
 
   //TODO: Изменить ширину ячеек таблицы
 
   return (
-    <Table dataSource={data} scroll={{y: 'calc(100vh - 244px)'}} style={{height: 'calc(100vh-244px)'}} bordered
-           pagination={{position: ['bottomCenter'], simple: true}} loading={dataOrderTable.length === 0} >
+    <Table dataSource={data} scroll={{y: 'calc(100vh - 244px)'}} bordered loading={dataOrderTable.length === 0}
+           pagination={{position: ['bottomCenter'], simple: true, defaultPageSize: 15}} className='customTable'>
       {/*<Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>*/}
       {/*<Table.Column title="Район" dataIndex="district" key="district"/>*/}
       {/*<Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate" sorter={(a,b) => a.modelPointRate - b.modelPointRate} showSorterTooltip={false} />*/}
@@ -58,6 +58,7 @@ const PointsList = () => {
                         sorter={(a, b) => a.flatsVolume - b.flatsVolume} showSorterTooltip={false}/>
           <Table.Column title="Показатель востребованности" dataIndex="trafficRate" key="trafficRate"
                         sorter={(a, b) => a.trafficRate - b.trafficRate} showSorterTooltip={false}/>
+          <Table.Column title="Координаты" dataIndex="coordinates" key="coordinates"/>
         </>
       )}
     </Table>

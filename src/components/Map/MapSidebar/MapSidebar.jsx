@@ -131,8 +131,8 @@ const MapSidebar = () => {
           />
         </Form.Item>
         <Divider className="mapForm__divider"/>
-        <Form.Item className="mapForm__item" label="Доступность (в метрах)" name="targetDoorstep" initialValue={100}>
-          <InputNumber min={1} max={3000} style={{width: '100%'}} addonAfter="метров"/>
+        <Form.Item className="mapForm__item" label="Доступность (в метрах)" name="targetDoorstep" initialValue={400} >
+          <InputNumber min={1} max={3000} style={{width: '100%'}} addonAfter="метров" disabled />
         </Form.Item>
         <Divider className="mapForm__divider"/>
         <Form.Item className="mapForm__item" label="Охват населения Москвы (в %)" name="targetCoverage"

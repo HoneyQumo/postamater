@@ -7,7 +7,7 @@ const Hello = () => {
   return (
     <div className='hello'>
       <Typography.Title className='hello__title' >Добро пожаловать в Постаматчик</Typography.Title>
-      <Typography.Text className='hello__text'>На данный момент приложение находится в режиме разработки.</Typography.Text>
+      <Typography.Text className='hello__text'>Рекомендательный сервис для определения оптимальных мест размещения постаматов.</Typography.Text>
     </div>
   );
 };

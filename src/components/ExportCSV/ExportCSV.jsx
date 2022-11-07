@@ -18,6 +18,7 @@ const ExportToCSV = () => {
     {label: 'Полное название', key: 'commonName'},
     {label: 'Трафик (Целевой показатель)', key: 'flatsVolume'},
     {label: 'Показатель востребованности', key: 'trafficRate'},
+    {label: 'Координаты', key: 'coordinates'},
   ];
 
   const data = [...dataOrderTable.map(points => ({
@@ -25,6 +26,7 @@ const ExportToCSV = () => {
     commonName: points.commonname,
     flatsVolume: points.flatsvolume,
     trafficRate: points.trafficrate,
+    coordinates: `${points.lat}, ${points.lon}`,
   }))];
 
   return (
