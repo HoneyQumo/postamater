@@ -23,7 +23,7 @@ const Map = () => {
 
   return (
     <Row className="map" wrap={false}>
-      <Col flex="200px" className="map__sidebar sidebar">
+      <Col flex="220px" className="map__sidebar sidebar">
         <MapSidebar/>
       </Col>
       <Col flex="auto" className="map__content content">

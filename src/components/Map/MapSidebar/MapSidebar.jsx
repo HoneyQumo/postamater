@@ -10,6 +10,7 @@ import {fetchOrderId} from '../../../store/slices/pointsListSlice';
 const MapSidebar = () => {
   const AOData = useSelector(state => state.pointsList.AOData);
   const AOWithMOData = useSelector(state => state.pointsList.AOWithMOData);
+  const statusOrder = useSelector(state => state.pointsList.statusOrder);
   const [targetDistrictList, setTargetDistrictList] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const typesObject = ['Киоски', 'МФЦ', 'Библиотеки', 'Дома культуры', 'Спортивные объекты'];
@@ -160,7 +161,7 @@ const MapSidebar = () => {
             >
               Очистить
             </Button>
-            <Button type="primary" htmlType="submit" className="mapForm__button">Отправить</Button>
+            <Button type="primary" htmlType="submit" className="mapForm__button" loading={statusOrder === 'pending'} >Отправить</Button>
           </div>
         </Form.Item>
       </Form>
