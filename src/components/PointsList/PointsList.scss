@@ -23,15 +23,22 @@
   }
 }
 
-.ant-spin-spinning {
-  max-height: none;
-}
-
-.ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
-  top: 50%;
-  left: 49.55%;
-}
-
 .ant-table-thead {
   height: 77px;
+}
+
+.empty {
+  // .empty__main
+  &__main {
+    margin: 16px 0;
+  }
+
+  // .empty__Button
+  &__Button {
+    transition: border-color .4s 0s;
+    &:hover,&:focus {
+      border-color: #FA2222;
+      color: #FA2222;
+    }
+  }
 }

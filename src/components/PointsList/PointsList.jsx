@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Table} from 'antd';
+import {Button, Empty, Table} from 'antd';
+import {Link} from 'react-router-dom';
 
 import './PointsList.scss';
 
@@ -26,8 +27,14 @@ const PointsList = () => {
   //TODO: Изменить ширину ячеек таблицы
 
   return (
-    <Table dataSource={data} scroll={{y: 'calc(100vh - 224px)'}} bordered loading={dataOrderTable.length === 0}
-           pagination={{position: ['bottomCenter'], simple: true, defaultPageSize: 15}} className='customTable' tableLayout='fixed' >
+    <Table dataSource={data} scroll={{y: 'calc(100vh - 224px)'}} bordered
+           pagination={{position: ['bottomCenter'], simple: true, defaultPageSize: 15}} className='customTable' tableLayout='fixed'
+           locale={{emptyText: (
+             <div className='empty'>
+               <Empty className='empty__main' description='Нет данных' image={Empty.PRESENTED_IMAGE_SIMPLE} />
+               <Button type='default' className='empty__Button'><Link to='/map'>Получить данные</Link></Button>
+             </div>
+             )}} >
       {/*<Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>*/}
       {/*<Table.Column title="Район" dataIndex="district" key="district"/>*/}
       {/*<Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate" sorter={(a,b) => a.modelPointRate - b.modelPointRate} showSorterTooltip={false} />*/}
@@ -51,7 +58,9 @@ const PointsList = () => {
       {/*                );*/}
       {/*              }}/>*/}
       {/*TODO: ЕСЛИ НЕТ ДАННЫХ НАПИСАТЬ ЧТО НЕТ ДАННЫХ*/}
-      {dataOrderTable.length === 0 ? null : (
+      {dataOrderTable.length === 0 ?
+        null
+        : (
         <>
           <Table.Column title="Тип объекта" dataIndex="category" key="category"/>
           <Table.Column title="Полное название" dataIndex="commonName" key="commonName"/>

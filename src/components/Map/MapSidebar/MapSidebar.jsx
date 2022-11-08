@@ -80,7 +80,6 @@ const MapSidebar = () => {
     }
 
     dispatch(fetchOrderId(formDataTemp))
-    // refForm.current.resetFields();
   };
 
   return (
@@ -165,7 +164,7 @@ const MapSidebar = () => {
           </div>
         </Form.Item>
       </Form>
-      <Button type={'primary'} block ghost>
+      <Button type='primary' block className='export__button' >
         <ExportToCSV/>
       </Button>
     </>

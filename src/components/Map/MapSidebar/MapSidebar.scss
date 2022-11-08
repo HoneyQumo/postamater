@@ -6,7 +6,6 @@
       margin: 0;
     }
   }
-
   // .mapForm__divider
   &__divider {
     margin: 5px 0;
@@ -16,7 +15,6 @@
   &__buttons{
     display: flex;
     justify-content: space-between;
-    //justify-content: flex-end;
   }
   // .mapForm__button
   &__button{
@@ -41,18 +39,18 @@
   }
 }
 
-.sidebar{
-  //&__exportButton {
-  //  border-color: #CC2222;
-  //  background-color: transparent;
-  //  color: #CC2222;
-  //
-  //  &:hover,&:focus {
-  //    border-color: #FA2222;
-  //    background-color: transparent;
-  //    color: #FA2222;
-  //  }
-  //}
+.export__button {
+  color: #40a9ff;
+  background-color: transparent;
+  border-color: #40a9ff;
+
+  transition: background-color .5s 0s;
+
+  &:hover,&:focus {
+    color: #fafafa;
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+  }
 }
 
 .ant-form-vertical .ant-form-item-label, .ant-col-24.ant-form-item-label, .ant-col-xl-24.ant-form-item-label {
