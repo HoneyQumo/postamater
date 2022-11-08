@@ -50,6 +50,7 @@ const PointsList = () => {
       {/*                  </Typography.Paragraph>*/}
       {/*                );*/}
       {/*              }}/>*/}
+      {/*TODO: ЕСЛИ НЕТ ДАННЫХ НАПИСАТЬ ЧТО НЕТ ДАННЫХ*/}
       {dataOrderTable.length === 0 ? null : (
         <>
           <Table.Column title="Тип объекта" dataIndex="category" key="category"/>
