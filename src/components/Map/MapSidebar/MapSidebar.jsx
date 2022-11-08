@@ -163,10 +163,12 @@ const MapSidebar = () => {
             <Button type="primary" htmlType="submit" className="mapForm__button" loading={statusOrder === 'pending'} >Отправить</Button>
           </div>
         </Form.Item>
+        <Form.Item className="mapForm__item">
+          <Button type='primary' block className='export__button' >
+            <ExportToCSV/>
+          </Button>
+        </Form.Item>
       </Form>
-      <Button type='primary' block className='export__button' >
-        <ExportToCSV/>
-      </Button>
     </>
   );
 };

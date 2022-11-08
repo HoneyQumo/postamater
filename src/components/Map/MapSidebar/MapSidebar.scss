@@ -1,37 +1,68 @@
+// .sidebar
+.sidebar {
+  padding: 15px 0 0 15px;
+}
+
 .mapForm {
+  //scroll
+  max-height: calc(100vh - 132px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  //levitating
+  position: sticky;
+  z-index: 101;
+  width: 240px;
+  background-color: #FFF;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  border: 1px solid lightgray;
+  padding: 5px 0 10px 12px;
+  //=================
+
+  &>*:not(:last-child) {
+    margin: 0 0 5px 0;
+  }
   // .mapForm__item
   &__item {
-    margin: 0 0 8px 0;
+    //
     &:nth-child(1) {
       margin: 0;
     }
+    &:last-child {
+      margin: 0;
+    }
   }
+
   // .mapForm__divider
   &__divider {
     margin: 5px 0;
   }
 
   // .mapForm__buttons
-  &__buttons{
+  &__buttons {
     display: flex;
     justify-content: space-between;
   }
+
   // .mapForm__button
-  &__button{
+  &__button {
     border-color: #CC2222;
     background-color: #CC2222;
 
-    &:hover,&:focus {
+    &:hover, &:focus {
       border-color: #FA2222;
       background-color: #FA2222;
     }
   }
-  &__button-reset{
+
+  &__button-reset {
     border-color: #CC2222;
     background-color: transparent;
     color: #CC2222;
 
-    &:hover,&:focus {
+    &:hover, &:focus {
       border-color: #FA2222;
       background-color: transparent;
       color: #FA2222;
@@ -40,16 +71,16 @@
 }
 
 .export__button {
-  color: #40a9ff;
+  color: #40A9FF;
   background-color: transparent;
-  border-color: #40a9ff;
+  border-color: #40A9FF;
 
   transition: background-color .5s 0s;
 
-  &:hover,&:focus {
-    color: #fafafa;
-    background-color: #40a9ff;
-    border-color: #40a9ff;
+  &:hover, &:focus {
+    color: #FAFAFA;
+    background-color: #40A9FF;
+    border-color: #40A9FF;
   }
 }
 
