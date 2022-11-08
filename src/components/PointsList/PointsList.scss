@@ -1,5 +1,5 @@
 .customTable {
-  height: calc(100vh - 244px);
+  height: calc(100vh - 224px);
   ::-webkit-scrollbar {
     height: 6px;
     width: 6px;
@@ -15,7 +15,7 @@
     border-radius: 4px;
   }
   tbody {
-    height: calc(100vh - 244px);
+    height: calc(100vh - 202px);
     tr {
       td {
       }
@@ -30,4 +30,8 @@
 .ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
   top: 50%;
   left: 49.55%;
+}
+
+.ant-table-thead {
+  height: 77px;
 }

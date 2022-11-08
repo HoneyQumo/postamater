@@ -26,8 +26,8 @@ const PointsList = () => {
   //TODO: Изменить ширину ячеек таблицы
 
   return (
-    <Table dataSource={data} scroll={{y: 'calc(100vh - 244px)'}} bordered loading={dataOrderTable.length === 0}
-           pagination={{position: ['bottomCenter'], simple: true, defaultPageSize: 15}} className='customTable'>
+    <Table dataSource={data} scroll={{y: 'calc(100vh - 224px)'}} bordered loading={dataOrderTable.length === 0}
+           pagination={{position: ['bottomCenter'], simple: true, defaultPageSize: 15}} className='customTable' tableLayout='fixed' >
       {/*<Table.Column title="Административный округ" dataIndex="admArea" key="admArea"/>*/}
       {/*<Table.Column title="Район" dataIndex="district" key="district"/>*/}
       {/*<Table.Column title="Показатель востребованности" dataIndex="modelPointRate" key="modelPointRate" sorter={(a,b) => a.modelPointRate - b.modelPointRate} showSorterTooltip={false} />*/}

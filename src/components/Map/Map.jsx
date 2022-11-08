@@ -5,6 +5,7 @@ import {YMaps, Map as DMap, Placemark} from '@pbe/react-yandex-maps';
 import './Map.scss';
 import MapSidebar from './MapSidebar/MapSidebar';
 import {useSelector} from 'react-redux';
+import Footer from '../Footer/Footer';
 
 const Map = () => {
   const [dataOrderMap, setDataOrderMap] = useState([]);
@@ -20,22 +21,25 @@ const Map = () => {
 
 
   return (
-    <Row className="map" wrap={false}>
-      <Col flex="220px" className="map__sidebar sidebar">
-        <MapSidebar/>
-      </Col>
-      <Col flex="auto" className="map__content content">
-        <YMaps>
-          <DMap width={'100%'} height={'calc(100vh - 132px)'} defaultState={{center: [55.76, 37.64], zoom: 9, controls: []}}>
-            {dataOrderMap.map((item) => {
-              const coordTemp = item.geometry.coordinates.split(',')
-              const trimCoord = coordTemp.map(item => item.trim())
-              return <Placemark geometry={[trimCoord[1], trimCoord[0]]} properties={{}} key={item.id} options={{preset: 'islands#dotIcon'}}/>
-            })}
-          </DMap>
-        </YMaps>
-      </Col>
-    </Row>
+    <>
+      <Row className="map" wrap={false}>
+        <Col flex="220px" className="map__sidebar sidebar">
+          <MapSidebar/>
+        </Col>
+        <Col flex="auto" className="map__content content">
+          <YMaps>
+            <DMap width={'100%'} height={'calc(100vh - 132px)'} defaultState={{center: [55.76, 37.64], zoom: 9, controls: []}}>
+              {dataOrderMap.map((item) => {
+                const coordTemp = item.geometry.coordinates.split(',')
+                const trimCoord = coordTemp.map(item => item.trim())
+                return <Placemark geometry={[trimCoord[1], trimCoord[0]]} properties={{}} key={item.id} options={{preset: 'islands#dotIcon'}}/>
+              })}
+            </DMap>
+          </YMaps>
+        </Col>
+      </Row>
+      <Footer />
+    </>
   );
 };
 

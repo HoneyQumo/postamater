@@ -3,7 +3,6 @@ import {Layout} from 'antd';
 
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
-import Footer from './components/Footer/Footer';
 import {useDispatch} from 'react-redux';
 import {getAODataFromGeoJSON, setAOWithMODataFromGeoJSON} from './store/slices/pointsListSlice';
 
@@ -23,7 +22,6 @@ const App = () => {
     <Layout className="app">
       <Header />
       <Main />
-      <Footer />
     </Layout>
   );
 };
