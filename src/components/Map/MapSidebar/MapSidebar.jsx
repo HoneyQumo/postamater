@@ -7,7 +7,7 @@ import ExportToCSV from '../../ExportCSV/ExportCSV';
 import {fetchOrderId} from '../../../store/slices/pointsListSlice';
 
 
-const MapSidebar = () => {
+const MapSidebar = ({showFilters}) => {
   const AOData = useSelector(state => state.pointsList.AOData);
   const AOWithMOData = useSelector(state => state.pointsList.AOWithMOData);
   const statusOrder = useSelector(state => state.pointsList.statusOrder);
@@ -84,7 +84,7 @@ const MapSidebar = () => {
 
   return (
     <>
-      <Form layout="vertical" className="mapForm" onFinish={handleFormSubmit} ref={refForm}>
+      <Form layout="vertical" className="mapForm" onFinish={handleFormSubmit} ref={refForm} style={{height: `${showFilters}`, boxShadow: '0px 0px 5px 2px rgba(34, 60, 80, 0.2)'}} >
         <Form.Item className="mapForm__item" name="selectAll">
           <Checkbox onChange={handleCheckboxToggle} checked={selectAll} value={selectAll}>Выбрать все</Checkbox>
         </Form.Item>

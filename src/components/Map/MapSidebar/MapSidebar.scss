@@ -1,9 +1,11 @@
 // .sidebar
 .sidebar {
   padding: 15px 0 0 15px;
+
 }
 
 .mapForm {
+  transition: all .3s 0s;
   //scroll
   max-height: calc(100vh - 132px);
   overflow-y: scroll;
@@ -28,7 +30,7 @@
   &__item {
     //
     &:nth-child(1) {
-      margin: 0;
+      margin-top: 15px;
     }
     &:last-child {
       margin: 0;
